@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookMyShow Clone</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <style>
+     .premiere-banner {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+  
+    }
+    .premiere-banner img {
+      height: 40px;
+      margin-right: 15px;
+    }
+    .movie-card {
+      background-color: #2b3148;
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+    .movie-card img {
+      height: 280px;
+      object-fit: cover;
+    }
+    .premiere-tag {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: #e83e8c;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-top-right-radius: 6px;
+    }
+    .movie-title {
+      font-weight: bold;
+      margin-top: 8px;
+      font-size: 1rem;
+    }
+    .movie-lang {
+      color: #bbb;
+      font-size: 0.9rem;
+    }
+    .scroll-container {
+      
+      display: flex;
+      gap: 50px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: none; /* Firefox */
+    }
+    .scroll-container::-webkit-scrollbar {
+      display: none; /* Chrome, Safari */
+    }
+    .logo-ticket { font-weight: 800; font-size: 1.25rem; letter-spacing: 0.5px; }
+    .logo-red { color: #e53935; }
+    .hover-dark:hover { color:#e53935 !important; }
+    .hero-wrapper { position: relative; background: linear-gradient(90deg,#0b0d19,#141a2e); border-radius: 20px; overflow: hidden; }
+    .hero-wrapper img { display:block; width:100%; height:auto; }
+     .event-card {
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .event-card:hover {
+      transform: scale(1.05);
+    }
+    .event-card img {
+    
+      object-fit: cover;
+    }
+    .event-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .event-count {
+      color: #666;
+    }
+    .s{
+       background-color: #2b3148;
+      color: white;
+    }
+      .music-section {
+      padding: 30px;
+    }
+    .music-card {
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: white;
+      transition: transform 0.3s;
+      min-width: 220px;
+    }
+    .music-card:hover {
+      transform: scale(1.05);
+    }
+    .music-card img {
+      border-radius: 12px 12px 0 0;
+      height: 320px;
+      object-fit: cover;
+      width: 100%;
+    }
+    .event-date {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: black;
+      color: white;
+      font-size: 0.9rem;
+      padding: 4px 12px;
+      border-top-right-radius: 8px;
+    }
+    .scroll-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: none;
+    }
+    .scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+    .event-title {
+      font-weight: bold;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+    .event-venue {
+      color: #555;
+      font-size: 0.9rem;
+    }
+    .event-type {
+      color: #777;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+    <div class="container-fluid px-3 px-md-4">
+      <!-- Brand -->
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <span class="logo-ticket"><img src="data:image/png;base64,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" height="60"  alt=""></span>
+      </a>
+
+      <!-- Search -->
+      <form class="d-none d-lg-flex flex-grow-1 mx-3">
+        <div class="input-group">
+          <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input class="form-control border-start-0" type="search" placeholder="Search for Movies, Events, Plays, Sports and Activities">
+        </div>
+      </form>
+
+      <!-- Right side -->
+      <div class="d-flex align-items-center gap-3">
+        <div class="dropdown">
+          <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="fa-solid fa-location-dot me-1"></i> Navsari
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Surat</a></li>
+            <li><a class="dropdown-item" href="#">Vadodara</a></li>
+            <li><a class="dropdown-item" href="#">Ahmedabad</a></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-sm btn-outline-dark rounded-circle p-2 d-flex align-items-center justify-content-center" data-bs-toggle="dropdown">
+            <i class="fa-regular fa-user"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li class="dropdown-header small text-muted px-3">Hi, Payal Patel</li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a class="dropdown-item" href="#">My Bookings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Search -->
+    <div class="container-fluid d-lg-none px-3 pb-2">
+      <div class="input-group">
+        <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input class="form-control border-start-0" type="search" placeholder="Search for Movies, Events, Plays, Sports and Activities">
+      </div>
+    </div>
+  </nav>
+
+  <!-- Secondary nav -->
+  <div class="bg-white border-bottom">
+    <div class="container-fluid px-3 px-md-4 d-flex gap-4 align-items-center overflow-auto py-2 small">
+      <a href="#" class="text-decoration-none text-dark fw-semibold hover-dark">Movies</a>
+      <a href="#" class="text-decoration-none text-dark fw-semibold hover-dark">Stream</a>
+      <a href="#" class="text-decoration-none text-dark fw-semibold hover-dark">Events</a>
+      <a href="#" class="text-decoration-none text-dark fw-semibold hover-dark">Plays</a>
+      <a href="#" class="text-decoration-none text-dark fw-semibold hover-dark">Sports</a>
+      <a href="#" class="text-decoration-none text-dark fw-semibold hover-dark">Activities</a>
+      <div class="ms-auto d-none d-md-flex gap-4">
+        <a href="#" class="text-decoration-none text-muted">ListYourShow</a>
+        <a href="#" class="text-decoration-none text-muted">Corporates</a>
+        <a href="#" class="text-decoration-none text-muted">Offers</a>
+        <a href="#" class="text-decoration-none text-muted">Gift Cards</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero banner -->
+  <section class="container-fluid my-3">
+    <div class="hero-wrapper">
+      <img src="https://assets-in-gm.bmscdn.com/promotions/cms/creatives/1755155608642_minecraftflashsaleweb.jpg" alt="Hero banner">
+    
+    </div>
+  </section>
+
+  <!-- Movies row -->
+  <section class="container my-5">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h5 class="mb-0">Recommended Movies</h5>
+     
+    </div>
+    <div class="row g-3">
+      <!-- Repeat cards -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OC42LzEwICAxMi4zSyBWb3Rlcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end:l-text,ie-UFJPTU9URUQ%3D,co-FFFFFF,bg-DC354B,ff-Roboto,fs-20,lx-N16,ly-12,lfo-top_right,pa-12_14_12_14,r-6,l-end/et00452035-htykjxsuvr-portrait.jpg" height="300"  class="card-img-top">
+          <div class="card-body">
+            <h6 class="card-title mb-1">Movie Title</h6>
+            <p class="card-text small text-muted mb-0">Action/Adventure</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OC4yLzEwICA4OC42SyBWb3Rlcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00356501-pyadxmyhee-portrait.jpg" height="300" class="card-img-top">
+          <div class="card-body">
+            <h6 class="card-title mb-1">Another Movie</h6>
+            <p class="card-text small text-muted mb-0">Drama</p>
+          </div>
+        </div>
+      </div>
+       <div class="col-6 col-md-4 col-lg-2">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OS42LzEwICAyNDUuN0sgVm90ZXM%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00429289-nmmqrhcemr-portrait.jpg" height="300" class="card-img-top">
+          <div class="card-body">
+            <h6 class="card-title mb-1">Another Movie</h6>
+            <p class="card-text small text-muted mb-0">Drama</p>
+          </div>
+        </div>
+      </div>
+      <!-- Add more cards as needed -->
+    </div>
+  </section>
+    <div class="container p-0">
+    <img src="https://assets-in.bmscdn.com/discovery-catalog/collections/tr:w-1440,h-120/stream-leadin-web-collection-202210241242.png" 
+         class="img-fluid w-100 rounded" 
+         alt="BookMyShow Stream">
+  </div>
+
+  <!-- Live Events Section -->
+  <div class="container mt-4">
+    <h3 class="mb-3">The Best Of Live Events</h3>
+    <div class="row g-4">
+      <!-- Comedy Shows -->
+      <div class="col-md-2 col-6">
+        <div class="card event-card">
+          <img  src="https://assets-in.bmscdn.com/discovery-catalog/collections/tr:w-800,h-800:l-text,ie-NiBFdmVudHM%3D,co-FFFFFF,ff-Roboto,fs-64,lx-48,ly-320,tg-b,pa-8_0_0_0,l-end:w-300/comedy-shows-collection-202211140440.png" alt="Comedy">
+          
+        </div>
+      </div>
+
+      <!-- Theatre Shows -->
+      <div class="col-md-2 col-6">
+        <div class="card event-card">
+          <img src="https://assets-in.bmscdn.com/discovery-catalog/collections/tr:w-800,h-800:l-text,ie-MyBFdmVudHM%3D,co-FFFFFF,ff-Roboto,fs-64,lx-48,ly-320,tg-b,pa-8_0_0_0,l-end:w-300/theatre-shows-collection-202211140440.png" alt="Theatre">
+          
+        </div>
+      </div>
+
+      <!-- Kids -->
+      <div class="col-md-2 col-6">
+        <div class="card event-card">
+          <img src="https://assets-in.bmscdn.com/discovery-catalog/collections/tr:w-800,h-800:l-text,ie-NSBFdmVudHM%3D,co-FFFFFF,ff-Roboto,fs-64,lx-48,ly-320,tg-b,pa-8_0_0_0,l-end:w-300/kids-banner-desktop-collection-202503251132.png" alt="Kids">
+          
+        </div>
+      </div>
+
+      <!-- Music Shows -->
+      <div class="col-md-2 col-6">
+        <div class="card event-card">
+          <img src="https://assets-in.bmscdn.com/discovery-catalog/collections/tr:w-800,h-800:l-text,ie-NyBFdmVudHM%3D,co-FFFFFF,ff-Roboto,fs-64,lx-48,ly-320,tg-b,pa-8_0_0_0,l-end:w-300/music-shows-collection-202211140440.png" alt="Music">
+         
+        </div>
+      </div>
+
+      <!-- Workshops -->
+      <div class="col-md-2 col-6">
+        <div class="card event-card">
+          <img src="https://assets-in.bmscdn.com/discovery-catalog/collections/tr:w-800,h-800:l-text,ie-MyBFdmVudHM%3D,co-FFFFFF,ff-Roboto,fs-64,lx-48,ly-320,tg-b,pa-8_0_0_0,l-end:w-300/workshop-and-more-web-collection-202211140440.png" alt="Workshops">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Premiere Banner -->
+  <div class="premiere-banner mt-5 s">
+    <img width="1500"   src="https://assets-in.bmscdn.com/discovery-catalog/collections/tr:w-1440,h-120/premiere-banner-web-collection-202208191200.png" alt="Premiere Logo">
+    
+  </div>
+
+  <!-- Section Title -->
+  <div class="container-fluid s ">
+    <h4>Premieres</h4>
+    <small class="text-light">Brand new releases every Friday</small>
+  </div>
+
+  <!-- Movies Row -->
+  <div class="container-fluid  s">
+    <div class="scroll-container">
+      
+      <!-- Movie 1 -->
+      <div class="card movie-card position-relative" style="min-width: 180px;">
+        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:l-image,i-discovery-catalog@@icons@@bms_premiere_v1.png,t-false,lfo-bottom_left,l-end/et00457290-eqwgfxcwqt-portrait.jpg" alt="Drive">
+        
+      </div>
+
+      <!-- Movie 2 -->
+      <div class="card movie-card position-relative" style="min-width: 180px;">
+        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:l-image,i-discovery-catalog@@icons@@bms_premiere_v1.png,t-false,lfo-bottom_left,l-end/et00432498-hkknxapwjb-portrait.jpg" alt="Jurassic World">
+       
+      </div>
+
+      <!-- Movie 3 -->
+      <div class="card movie-card position-relative" style="min-width: 180px;">
+        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:l-image,i-discovery-catalog@@icons@@bms_premiere_v1.png,t-false,lfo-bottom_left,l-end/et00432076-svhxwkkfbv-portrait.jpg" alt="M3GAN 2.0">
+        
+      </div>
+
+      <!-- Movie 4 -->
+      <div class="card movie-card position-relative" style="min-width: 180px;">
+        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:l-image,i-discovery-catalog@@icons@@bms_premiere_v1.png,t-false,lfo-bottom_left,l-end/et00438590-xefherraxj-portrait.jpg" alt="Materialists">
+      
+      </div>
+
+      <!-- Movie 5 -->
+      <div class="card movie-card position-relative" style="min-width: 180px;">
+        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:l-image,i-discovery-catalog@@icons@@bms_premiere_v1.png,t-false,lfo-bottom_left,l-end/et00128936-yhlllmmewv-portrait.jpg" alt="SIR">
+       
+      </div>
+
+    </div>
+  </div>
+
+<!--music section-->
+   <div class="music-section container">
+    <h4>Your Music Studio</h4>
+    <div class="scroll-container mt-3">
+
+      <!-- Card 1 -->
+      <div class="music-card position-relative">
+        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-U2F0LCAyMyBBdWc%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00458349-cvrubgvhmk-portrait.jpg" alt="Iktara Live">
+        <div class="event-date">Sat, 23 Aug</div>
+        <div class="p-2">
+          <div class="event-title">IKTARA - HARDIK DAVE</div>
+          <div class="event-venue">J. N. Tata Hall: Navsari</div>
+          <div class="event-type">Concerts</div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="music-card position-relative">
+        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-U2F0LCAyMyBBdWc%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00457132-skmptkvdaw-portrait.jpg" alt="Filmfare Awards Punjabi">
+        <div class="event-date">Sat, 23 Aug</div>
+        <div class="p-2">
+          <div class="event-title">Filmfare Awards Punjabi 2025</div>
+          <div class="event-venue">I.S. Bindra PCA Stadium: Mohali</div>
+          <div class="event-type">Concerts</div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="music-card position-relative">
+        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-V2VkLCAxOSBOb3Y%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00450624-egyhpntquf-portrait.jpg" alt="Travis Scott">
+        <div class="event-date">Wed, 19 Nov</div>
+        <div class="p-2">
+          <div class="event-title">Travis Scott: Circus Maximus Stadium Tour</div>
+          <div class="event-venue">Mahalaxmi Race Course: Mumbai</div>
+          <div class="event-type">Concerts</div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="music-card position-relative">
+        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-RnJpLCAxOSBEZWM%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00457262-uznfmnhfyw-portrait.jpg" alt="Sunburn Festival">
+        <div class="event-date">Fri, 19 Dec</div>
+        <div class="p-2">
+          <div class="event-title">Sunburn Festival 2025</div>
+          <div class="event-venue">Mumbai: Maharashtra</div>
+          <div class="event-type">Concerts</div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="music-card position-relative">
+        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-U3VuLCAxIEZlYg%3D%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00457514-sjrdkkydae-portrait.jpg" alt="The Lumineers">
+        <div class="event-date">Sun, 1 Feb</div>
+        <div class="p-2">
+          <div class="event-title">The Lumineers: The Automatic World Tour</div>
+          <div class="event-venue">Huda Ground: Gurugram</div>
+          <div class="event-type">Concerts</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <footer class="py-5 text-center text-muted small">
+    &copy; 2025 BookMyShow Clone (HTML + Bootstrap Demo)
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
