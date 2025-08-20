@@ -102,28 +102,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="screen-card d-flex flex-column align-items-center text-black">
+                    <div class="screen-card d-flex flex-column align-items-center text-white">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf84B8isNS1y7-JCc67uiKaB3vuNlSC224Zg&s" alt="">
                         <img src="/assets/img/screen.svg" alt="">
                     </div>
                     <div class="seats text-warning text-center mt-4">
                         <div class="fw-bold">₹130 Marvel</div>
-                        <div class="seat" data-price="130" data-seat="A1">A1</div>
-                        <div class="seat" data-price="130" data-seat="A2">A2</div>
-                        <div class="seat" data-price="130" data-seat="A3">A3</div>
+                        <div class="seat" data-seat="A1">A1</div>
+                        <div class="seat" data-seat="A2">A2</div>
+                        <div class="seat" data-seat="A3">A3</div>
                         <div class="seat me-5" data-seat="A4">A4</div>
                         <div class="seat" data-seat="A5">A5</div>
                         <div class="seat" data-seat="A6">A6</div>
-                        <div class="seat" data-seat="A7">A7</div>
-                        <div class="seat" data-seat="A8">A8</div>
-                        <div class="seat" data-seat="A9">A9</div>
-                        <div class="seat" data-seat="A10">A10</div>
-                        <div class="seat" data-seat="A11">A11</div>
-                        <div class="seat me-5" data-seat="A12">A12</div>
-                        <div class="seat booked" data-seat="A13">A13</div>
-                        <div class="seat booked" data-seat="A14">A14</div>
-                        <div class="seat " data-seat="A15">A15</div>
-                        <div class="seat " data-seat="A16">A16</div>
+                        <div class="seat" data-seat="A6">A7</div>
+                        <div class="seat" data-seat="A6">A8</div>
+                        <div class="seat" data-seat="A6">A9</div>
+                        <div class="seat" data-seat="A6">A10</div>
+                        <div class="seat" data-seat="A6">A11</div>
+                        <div class="seat me-5" data-seat="A6">A12</div>
+                        <div class="seat booked" data-seat="A6">A13</div>
+                        <div class="seat booked" data-seat="A6">A14</div>
+                        <div class="seat " data-seat="A6">A15</div>
+                        <div class="seat " data-seat="A6">A16</div>
                     </div>
                     <div class="seats text-warning text-center mt-3">
                         <div class="fw-bold">₹150 Royal</div>
@@ -218,11 +218,11 @@
      </section>
 
     <!-- Footer -->
-     <!-- <footer class="pt-5 ">
+     <!-- <footer class="pt-5">
       <div class="container">
         <div class="row">
           <div class="col-md-8">
-            <div class="f-content text-black">
+            <div class="f-content text-white">
               <span class="text-danger fs-4 fw-medium">Book</span><span class="fs-4 fw-medium">MyTicket</span>
               <p class="w-75 pe-5 mt-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam, sequi voluptas possimus ea voluptatem ex voluptate, natus voluptatum aliquam odio sint fuga exercitationem, sapiente harum dignissimos repudiandae vel dolores explicabo?</p>
               <img src="/assets/img/googlePlay.svg" alt="">
@@ -231,22 +231,22 @@
           </div>
           <div class="col-md-4">
             <div class="f-contact d-flex justify-content-between">
-                <div class="f-about text-black">
+                <div class="f-about text-white">
                   <h5 class="mb-2">Company</h5>
-                  <a href="" class="text-decoration-none d-block text-black-50">Home</a>
-                  <a href="" class="text-decoration-none d-block text-black-50">About Us</a>
-                  <a href="" class="text-decoration-none d-block text-black-50">Contact Us</a>
-                  <a href="" class="text-decoration-none d-block text-black-50">Privacy policy</a>
+                  <a href="" class="text-decoration-none d-block text-white-50">Home</a>
+                  <a href="" class="text-decoration-none d-block text-white-50">About Us</a>
+                  <a href="" class="text-decoration-none d-block text-white-50">Contact Us</a>
+                  <a href="" class="text-decoration-none d-block text-white-50">Privacy policy</a>
                 </div>
-                <div class="f-info text-black">
+                <div class="f-info text-white">
                   <h5>Get in touch</h5>
-                  <p class="mb-0 text-black-50">+1-234-567-890</p>
-                  <p class="mb-0 text-black-50">contact@gmail.com</p>
+                  <p class="mb-0 text-white-50">+1-234-567-890</p>
+                  <p class="mb-0 text-white-50">contact@gmail.com</p>
                 </div>
             </div>
           </div>
         </div>
-        <div class="copyright text-black text-center border-top mt-3">
+        <div class="copyright text-white text-center border-top mt-3">
           <p class="py-3 mb-0">Copyright 2025 © GreatStack. All Right Reserved.</p>
         </div>
       </div>
