@@ -1,156 +1,172 @@
-<%- include('../partials/header.ejs')%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>bookMyTicket - Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <div class="main-panel">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar bar1"></span>
-                        <span class="icon-bar bar2"></span>
-                        <span class="icon-bar bar3"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-warning text-center">
-                                            <i class="ti-server"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Capacity</p>
-                                            105GB
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-success text-center">
-                                            <i class="ti-wallet"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Revenue</p>
-                                            $1,345
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-danger text-center">
-                                            <i class="ti-pulse"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Errors</p>
-                                            23
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-timer"></i> In the last hour
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-info text-center">
-                                            <i class="ti-twitter-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Followers</p>
-                                            +45
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fa;
+    }
+    .sidebar {
+      height: 100vh;
+      background: #1e1e2f;
+      color: #fff;
+      position: fixed;
+      width: 250px;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+    }
+    .sidebar .nav-link {
+      color: #bbb;
+      font-weight: 500;
+    }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover {
+      background: #dc3545;
+      color: #fff;
+      border-radius: 8px;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    .card-stats {
+      border: none;
+      border-radius: 15px;
+      color: #fff;
+    }
+    .bg-gradient-red { background: linear-gradient(45deg, #ff4b2b, #ff416c); }
+    .bg-gradient-green { background: linear-gradient(45deg, #56ab2f, #a8e063); }
+    .bg-gradient-blue { background: linear-gradient(45deg, #36d1dc, #5b86e5); }
+    .bg-gradient-orange { background: linear-gradient(45deg, #ff8008, #ffc837); }
+    .card h5, .card p { margin: 0; }
+  </style>
+</head>
+<body>
 
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Users Behavior</h4>
-                                <p class="category">24 Hours performance</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartHours" class="ct-chart"></div>
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Click
-                                        <i class="fa fa-circle text-warning"></i> Click Second Time
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated 3 minutes ago
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- Sidebar -->
+  <div class="sidebar d-flex flex-column p-3">
+    <h3 class="text-center mb-4">🎬 bookMyTicket</h3>
+    <ul class="nav flex-column">
+      <li><a href="/admin" class="nav-link active"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
+      <li><a href="/addMovie" class="nav-link"><i class="bi bi-film me-2"></i> Add Movie</a></li>
+      <li><a href="/list" class="nav-link"><i class="bi bi-list-ul me-2"></i> Movie List</a></li>
+      <li><a href="/trailer" class="nav-link"><i class="bi bi-play-circle me-2"></i> Trailers</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-danger">Admin Panel</a>
+        <form class="d-flex ms-auto">
+          <input class="form-control me-2" type="search" placeholder="Search">
+          <button class="btn btn-danger">Search</button>
+        </form>
+        <ul class="navbar-nav ms-3">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="bi bi-person-circle"></i> Admin
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Dashboard Stats -->
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="card card-stats bg-gradient-red p-3 shadow">
+          <h5>Capacity</h5>
+          <p class="fs-4">105GB</p>
         </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-stats bg-gradient-green p-3 shadow">
+          <h5>Revenue</h5>
+          <p class="fs-4">$1,345</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-stats bg-gradient-blue p-3 shadow">
+          <h5>Errors</h5>
+          <p class="fs-4">23</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-stats bg-gradient-orange p-3 shadow">
+          <h5>Followers</h5>
+          <p class="fs-4">+45</p>
+        </div>
+      </div>
+    </div>
 
-        <%- include('../partials/footer.ejs')%>
+    <!-- Charts -->
+    <div class="row mt-4">
+      <div class="col-md-8">
+        <div class="card shadow-sm p-3">
+          <h5 class="fw-bold">User Behavior</h5>
+          <canvas id="userChart" height="100"></canvas>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+          <h5 class="fw-bold">Revenue Sources</h5>
+          <canvas id="revenueChart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // User Behavior Chart
+    new Chart(document.getElementById('userChart'), {
+      type: 'line',
+      data: {
+        labels: ["00:00","04:00","08:00","12:00","16:00","20:00"],
+        datasets: [{
+          label: 'Active Users',
+          data: [120, 190, 300, 500, 200, 300],
+          borderColor: '#dc3545',
+          fill: true,
+          backgroundColor: 'rgba(220,53,69,0.1)'
+        }]
+      }
+    });
+
+    // Revenue Sources Chart
+    new Chart(document.getElementById('revenueChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ["Movies", "Events", "Concerts"],
+        datasets: [{
+          data: [55, 25, 20],
+          backgroundColor: ['#36d1dc','#ff416c','#ffc837']
+        }]
+      }
+    });
+  </script>
+</body>
+</html>

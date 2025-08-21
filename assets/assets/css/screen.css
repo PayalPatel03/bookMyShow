@@ -11,21 +11,22 @@
 }
 
 .seat {
-      display: inline-block;
-      width: 45px;
-      height: 45px;
-      margin: 5px;
-      line-height: 45px;
-      text-align: center;
-      border: 1px solid #ff4d6d;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: 0.3s;
+   display: inline-block;
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+  background: #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 35px;
+  text-align: center;
     }
 
      .seat.selected {
-      background: #ff4d6d;
-      color: #fff;
+       background: #28a745 !important;
+  color: white;
     }
 /* Booked (disabled) seat */
 .seat.booked {
@@ -35,3 +36,7 @@
   cursor: not-allowed !important;
   pointer-events: none;
 }
+
+
+
+
