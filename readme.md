@@ -21,6 +21,7 @@ The project follows an **MVC architecture** for clean code separation.
 
 NodeJs-Movie/
 ├── assets/ # Static files (CSS, JS, images) used in EJS views
+```
 ├── configs/ # Configuration (e.g., MongoDB connection)
 ├── controllers/ # Business logic for Movies, Trailers, Home
 ├── middleware/ # Custom middleware (file upload, error handling)
